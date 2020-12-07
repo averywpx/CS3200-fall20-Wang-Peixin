@@ -1,16 +1,28 @@
 package com.example.wap.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="meetings")
 public class Meeting {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
+    private String title;
+
+
     private String date;
     private String location;
     private String content;
+
+
+
+    @ManyToOne
+    @JsonIgnore
+    private Club club;
 
     public Meeting() {
     }
@@ -52,5 +64,22 @@ public class Meeting {
 
     public String getContent() {
         return content;
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

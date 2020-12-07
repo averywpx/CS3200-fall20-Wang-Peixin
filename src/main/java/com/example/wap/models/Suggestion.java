@@ -1,5 +1,7 @@
 package com.example.wap.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
@@ -10,10 +12,23 @@ import javax.persistence.*;
 public class Suggestion {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
     private String title;
     private String description;
+
+    @ManyToOne
+    @JsonIgnore
+    private Club club;
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
 
     public Suggestion(Integer id, String title, String description) {
         this.id = id;

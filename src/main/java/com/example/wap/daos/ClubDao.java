@@ -12,23 +12,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClubDao {
     @Autowired
     ClubRepository ClubRepository;
+
     @GetMapping("/findAllClubs")
     public Iterable<Club> findAllClubs() {
         return ClubRepository.findAll();
     }
+
     @GetMapping("/findClubById/{cid}")
     public Club findClubById(@PathVariable("cid") Integer cid) {
         return ClubRepository.findById(cid).get();
     }
+
     @GetMapping("/deleteClub/{cid}")
     public void deleteClub(@PathVariable("cid") Integer cid) {
         ClubRepository.deleteById(cid);
     }
+
+    //    @GetMapping("/createClub")
+//    public Club createClub( @RequestBody Club newClub) {
+//
+//        return ClubRepository.save(newClub);
+//    }
     @GetMapping("/createClub")
-    public Club createClub( @RequestBody Club newClub) {
+    public Club createClub() {
+        Club newClub = new Club();
+        newClub.setName("New Club");
 
         return ClubRepository.save(newClub);
     }
+
     @GetMapping("/updateClub/{ClubId}/{newName}")
     public Club updateClub(
             @PathVariable("ClubId") Integer ClubId,

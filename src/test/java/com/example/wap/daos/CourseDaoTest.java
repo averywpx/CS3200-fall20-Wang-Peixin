@@ -1,34 +1,34 @@
 package com.example.wap.daos;
 
-import com.example.wap.models.Course;
+import com.example.wap.models.Club;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class CourseDaoTest {
+class ClubDaoTest {
     @Autowired
-    CourseDao dao;
+    ClubDao dao;
 
     @Test
-    void findAllCourses() {
-        Iterable<Course> courses = dao.findAllCourses();
-        for(Course course: courses) {
-            System.out.println(course);
+    void findAllClubs() {
+        Iterable<Club> Clubs = dao.findAllClubs();
+        for(Club Club: Clubs) {
+            System.out.println(Club);
         }
     }
 
     @Test
-    void findCourseById() {
+    void findClubById() {
     }
 
     @Test
-    void createCourse() {
+    void createClub() {
     }
 
     @Test
-    void updateCourse() {
+    void updateClub() {
     }
 
     @Test
-    void deleteCourse() {
+    void deleteClub() {
     }
 }

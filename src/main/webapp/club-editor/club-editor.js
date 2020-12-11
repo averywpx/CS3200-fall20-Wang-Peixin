@@ -49,6 +49,9 @@ class ClubEditor extends React.Component {
                 <a href={`../../suggestion-list/suggestion-list.html?clubId=${this.state.club.clubId}`}>
                     Suggestions
                 </a>
+                <a href={`../../student-list/student-list.html?clubId=${this.state.club.clubId}`}>
+                    Students
+                </a>
             </div>
         )
     }

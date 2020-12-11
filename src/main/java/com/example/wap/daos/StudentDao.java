@@ -27,9 +27,9 @@ public class StudentDao {
         return StudentRepository.findAll();
     }
 
-    @GetMapping("/findStudentById/{cid}")
-    public Student findStudentById(@PathVariable("cid") Integer cid) {
-        return StudentRepository.findById(cid).get();
+    @GetMapping("/findStudentById/{sid}")
+    public Student findStudentById(@PathVariable("sid") Integer sid) {
+        return StudentRepository.findById(sid).get();
     }
 
     @GetMapping("/deleteStudent/{cid}")

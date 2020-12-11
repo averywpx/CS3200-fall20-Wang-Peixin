@@ -3,7 +3,7 @@ const FIND_SUGGESTIONS_FOR_CLUB = "http://localhost:8080/findSuggestionsForClub"
 const CREATE_SUGGESTION_URL = "http://localhost:8080/createSuggestionForClub"
 const DELETE_SUGGESTION_URL = "http://localhost:8080/deleteSuggestion"
 const FIND_SUGGESTION_BY_ID = "http://localhost:8080/findSuggestionById"
-const UPDATE_SECTION     = "http://localhost:8080/updateSuggestion"
+const UPDATE_SUGGESTION     = "http://localhost:8080/updateSuggestion"
 
 
 const findAllSuggestions = () =>
@@ -26,5 +26,5 @@ const findSuggestionById = (SuggestionId) =>
         .then(response => response.json())
 
 const updateSuggestion = (suggestion) =>
-    fetch(`${UPDATE_SECTION}/${suggestion.id}/${suggestion.title}`)
+    fetch(`${UPDATE_SUGGESTION}/${suggestion.id}/${suggestion.title}`)
         .then(response => response.json())

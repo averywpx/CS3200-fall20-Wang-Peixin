@@ -1,29 +1,7 @@
-const FIND_ALL_MEETING  = "http://localhost:8080/findAllMeetings"
-const FIND_MEETING_BY_ID = "http://localhost:8080/findMeetingById"
-const CREATE_MEETING_URL = "http://localhost:8080/createMeeting"
-const DELETE_MEETING_URL = "http://localhost:8080/deleteMeeting"
-const UPDATE_MEETING     = "http://localhost:8080/updateMeeting"
-const FIND_MEETINGS_FOR_CLUB = "http://localhost:8080/findMeetingsForClub"
+const FIND_ALL_MEETINGS  = "http://localhost:8080/findAllMeetings"
 
-const findAllMeetings = () =>
-    fetch(`${FIND_ALL_MEETING}`)
+const findAllMeetings = () =>{
+    console.log(FIND_ALL_MEETINGS)
+    fetch(`${FIND_ALL_MEETINGS}`)
         .then(response => response.json())
-
-const findMeetingsForClub = (cid) =>
-    fetch(`${FIND_MEETINGS_FOR_CLUB}/${cid}`)
-        .then(response => response.json())
-
-const findMeetingById = (MeetingId) =>
-    fetch(`${FIND_MEETING_BY_ID}/${MeetingId}`)
-        .then(response => response.json())
-
-const createMeeting = (meeting) =>
-    fetch(`${CREATE_MEETING_URL}`)
-        .then(response => response.json())
-
-const deleteMeeting = (MeetingId) =>
-    fetch(`${DELETE_MEETING_URL}/${MeetingId}`)
-
-const updateMeeting = (Meeting) =>
-    fetch(`${UPDATE_MEETING}/${Meeting.meetingId}/${Meeting.title}`)
-        .then(response => response.json())
+}

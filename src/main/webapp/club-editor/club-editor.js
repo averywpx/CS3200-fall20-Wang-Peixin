@@ -40,11 +40,14 @@ class ClubEditor extends React.Component {
                         Save
                     </button>
                     <a className="btn btn-danger" href="../../club-list/club-list.html">
-                        Cancel
+                        Back
                     </a>
                 </form>
                 <a href={`../../meeting-list/meeting-list.html?clubId=${this.state.club.clubId}`}>
                     Meetings
+                </a>
+                <a href={`../../suggestion-list/suggestion-list.html?clubId=${this.state.club.clubId}`}>
+                    Suggestions
                 </a>
             </div>
         )

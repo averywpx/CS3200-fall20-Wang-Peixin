@@ -27,8 +27,12 @@ public class EnrollmentDao {
             @PathVariable("cid") Integer clubId){
 
         Enrollment enrollment = new Enrollment();
+        Club club = clubRepository.findById(clubId).get();
+        Student student = studentRepository.findById(studentId).get();
         enrollment.setStudentId(studentId);
         enrollment.setClubId(clubId);
+        enrollment.setStudent(student);
+        enrollment.setClub(club);
         enrollmentRepository.save(enrollment);
         return enrollment;
     }

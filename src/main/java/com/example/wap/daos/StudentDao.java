@@ -1,6 +1,9 @@
 package com.example.wap.daos;
 
+import com.example.wap.models.Enrollment;
 import com.example.wap.models.Student;
+import com.example.wap.models.Suggestion;
+import com.example.wap.repositories.ClubRepository;
 import com.example.wap.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class StudentDao {
     @Autowired
     StudentRepository StudentRepository;
+    
+    @Autowired
+    ClubRepository ClubRepository;
 
     @GetMapping("/findAllStudents")
     public Iterable<Student> findAllStudents() {
@@ -49,5 +58,24 @@ public class StudentDao {
         Student.setUsername(newName);
         return StudentRepository.save(Student);
     }
+    
+    @GetMapping("/findStudentsForClub/{cid}")
+    public List<Student> findStudentsForClub(
+            @PathVariable("cid") Integer cid) {
+        List<Enrollment> studentIds = ClubRepository.findById(cid).get().getStudents();
+        List<Student> students = new ArrayList<>();
+        for (Enrollment e: studentIds){
+            students.add(e.getStudent());
+        }
+
+        return students;
+    }
+//@GetMapping("/findStudentsForClub/{cid}")
+//public List<Enrollment> findStudentsForClub(
+//        @PathVariable("cid") Integer cid) {
+//    List<Enrollment> studentIds = ClubRepository.findById(cid).get().getStudents();
+//
+//    return studentIds;
+//}
 }
 

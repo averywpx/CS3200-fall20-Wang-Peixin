@@ -1,7 +1,7 @@
 class StudentEditor extends React.Component {
     state = {
         student: {},
-        clubId: 0
+        clubId: 0,
     }
 
     findStudentById = () => {
@@ -53,6 +53,9 @@ class StudentEditor extends React.Component {
                         className="btn btn-success">
                         Save
                     </button>
+                    <a href={`../../club-list/club-list.html?sId=${this.state.student.studentId}`}>
+                        Search Club
+                    </a>
                 </form>
             </div>
         )

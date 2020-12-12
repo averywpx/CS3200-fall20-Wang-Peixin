@@ -3,6 +3,8 @@ const FIND_CLUB_BY_ID = "http://localhost:8080/findClubById"
 const CREATE_CLUB_URL = "http://localhost:8080/createClub"
 const DELETE_CLUB_URL = "http://localhost:8080/deleteClub"
 const UPDATE_CLUB     = "http://localhost:8080/updateClub"
+const FIND_CLUBS_FOR_STUDENT = "http://localhost:8080/findClubsForStudent"
+const ENROLL_STUDENT  = "http://localhost:8080/enrollStudent"
 
 const findAllClubs = () =>
     fetch(`${FIND_ALL_CLUBS}`)
@@ -21,4 +23,12 @@ const deleteClub = (ClubId) =>
 
 const updateClub = (club) =>
     fetch(`${UPDATE_CLUB}/${club.clubId}/${club.name}`)
+        .then(response => response.json())
+
+const findClubsForStudent = (sid) =>
+    fetch(`${FIND_CLUBS_FOR_STUDENT}/${sid}`)
+        .then(response => response.json())
+
+const enrollStudent = (sid, cid) =>
+    fetch(`${ENROLL_STUDENT}/${sid}/InClub/${cid}`)
         .then(response => response.json())

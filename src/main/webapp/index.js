@@ -1,6 +1,6 @@
 ReactDOM.render(
-  <CourseList />,
-    <StudentList/>,
+  // <CourseList />,
+  //   <StudentList/>,
     <Register/>,
     <Login/>,
   document.getElementById('root')

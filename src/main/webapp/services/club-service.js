@@ -29,6 +29,6 @@ const findClubsForStudent = (sid) =>
     fetch(`${FIND_CLUBS_FOR_STUDENT}/${sid}`)
         .then(response => response.json())
 
-const enrollStudent = (sid, cid) =>
-    fetch(`${ENROLL_STUDENT}/${sid}/InClub/${cid}`)
+const enrollStudent = (sid, cid, isPresident) =>
+    fetch(`${ENROLL_STUDENT}/${sid}/InClub/${cid}/${isPresident}`)
         .then(response => response.json())

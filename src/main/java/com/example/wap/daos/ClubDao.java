@@ -1,10 +1,7 @@
 package com.example.wap.daos;
 
-import com.example.wap.models.Club;
-import com.example.wap.models.Enrollment;
-import com.example.wap.models.Student;
-import com.example.wap.repositories.ClubRepository;
-import com.example.wap.repositories.StudentRepository;
+import com.example.wap.models.*;
+import com.example.wap.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +19,15 @@ public class ClubDao {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    EnrollmentRepository enrollmentRepository;
+
+    @Autowired
+    SuggestionRepository SuggestionRepository;
+
+    @Autowired
+    MeetingRepository MeetingRepository;
+
     @GetMapping("/findAllClubs")
     public Iterable<Club> findAllClubs() {
         return ClubRepository.findAll();
@@ -34,6 +40,24 @@ public class ClubDao {
 
     @GetMapping("/deleteClub/{cid}")
     public void deleteClub(@PathVariable("cid") Integer cid) {
+        Club club = ClubRepository.findById(cid).get();
+        List<Enrollment> unenroll = club.getStudents();
+        for(Enrollment e: unenroll){
+            EnrollmentId enrollmentId = new EnrollmentId();
+            enrollmentId.setStudentId(e.getStudentId());
+            enrollmentId.setClubId(e.getClubId());
+            enrollmentRepository.deleteById(enrollmentId);
+        }
+
+        List<Suggestion> suggestions = club.getSuggestions();
+        for(Suggestion s: suggestions){
+            SuggestionRepository.deleteById(s.getId());
+        }
+
+        List<Meeting> meetings = club.getMeetings();
+        for(Meeting m: meetings){
+            MeetingRepository.deleteById(m.getId());
+        }
         ClubRepository.deleteById(cid);
     }
 

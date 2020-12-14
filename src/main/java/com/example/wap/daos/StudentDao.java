@@ -1,9 +1,11 @@
 package com.example.wap.daos;
 
 import com.example.wap.models.Enrollment;
+import com.example.wap.models.EnrollmentId;
 import com.example.wap.models.Student;
 import com.example.wap.models.Suggestion;
 import com.example.wap.repositories.ClubRepository;
+import com.example.wap.repositories.EnrollmentRepository;
 import com.example.wap.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,9 @@ public class StudentDao {
     @Autowired
     ClubRepository ClubRepository;
 
+    @Autowired
+    EnrollmentRepository enrollmentRepository;
+
     @GetMapping("/findAllStudents")
     public Iterable<Student> findAllStudents() {
         return StudentRepository.findAll();
@@ -32,9 +37,19 @@ public class StudentDao {
         return StudentRepository.findById(sid).get();
     }
 
-    @GetMapping("/deleteStudent/{cid}")
-    public void deleteStudent(@PathVariable("cid") Integer cid) {
-        StudentRepository.deleteById(cid);
+    @GetMapping("/deleteStudent/{sid}")
+    public void deleteStudent(@PathVariable("sid") Integer sid) {
+        Student student = StudentRepository.findById(sid).get();
+        List<Enrollment> unenroll = student.getClubs();
+        for(Enrollment e: unenroll){
+            EnrollmentId enrollmentId = new EnrollmentId();
+            enrollmentId.setStudentId(e.getStudentId());
+            enrollmentId.setClubId(e.getClubId());
+            enrollmentRepository.deleteById(enrollmentId);
+        }
+
+
+        StudentRepository.deleteById(sid);
     }
 
     //    @GetMapping("/createStudent")
@@ -50,12 +65,36 @@ public class StudentDao {
         return StudentRepository.save(newStudent);
     }
 
-    @GetMapping("/updateStudent/{StudentId}/{newName}")
+    @GetMapping("/register/{username}/{password}")
+    public Student register(@PathVariable("username") String username,
+                            @PathVariable("password") String password) {
+        Student newStudent = new Student();
+        newStudent.setUsername(username);
+        newStudent.setPassword(password);
+
+        return StudentRepository.save(newStudent);
+    }
+
+    @GetMapping("/login/{username}/{password}")
+    public Student login(@PathVariable("username") String username,
+                         @PathVariable("password") String password) {
+        Student student = StudentRepository.findUserByCredentials(username, password);
+
+        return student;
+    }
+
+    @GetMapping("/updateStudent/{StudentId}/{newName}/{password}/{phone}/{email}")
     public Student updateStudent(
             @PathVariable("StudentId") Integer StudentId,
-            @PathVariable("newName") String newName) {
+            @PathVariable("newName") String newName,
+            @PathVariable("password") String password,
+            @PathVariable("phone") String phone,
+            @PathVariable("email") String email) {
         Student Student = StudentRepository.findById(StudentId).get();
         Student.setUsername(newName);
+        Student.setPassword(password);
+        Student.setPhone(phone);
+        Student.setEmail(email);
         return StudentRepository.save(Student);
     }
     

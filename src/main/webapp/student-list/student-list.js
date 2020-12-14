@@ -23,7 +23,11 @@ class StudentList extends React.Component {
                 cid: clubId,
                 students: students,
                 inClub: true}))
+
     }
+
+
+
 
     createStudent = () => {
         console.log(this.state)

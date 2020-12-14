@@ -25,5 +25,5 @@ const findMeetingById = (meetingId) =>
         .then(response => response.json())
 
 const updateMeeting = (meeting) =>
-    fetch(`${UPDATE_MEETING}/${meeting.id}/${meeting.title}`)
+    fetch(`${UPDATE_MEETING}/${meeting.id}/${meeting.title}/${meeting.date}/${meeting.location}/${meeting.content}`)
         .then(response => response.json())

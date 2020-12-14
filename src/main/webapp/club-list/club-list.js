@@ -2,7 +2,8 @@ class ClubList extends React.Component {
     state = {
         clubs: [],
         sid: 0,
-        isStudent: false
+        isStudent: false,
+        isPresident:false
     }
 
     findAllClubs = () =>
@@ -17,9 +18,15 @@ class ClubList extends React.Component {
       deleteClub(clubId)
         .then(() => this.findAllClubs())
 
-    enrollStudent = (sid, cid) =>
-        enrollStudent(sid, cid)
+    enrollStudent = (sid, cid, isPresident) =>
+        enrollStudent(sid, cid, isPresident)
             .then(() => this.findAllClubs())
+
+    // isPresident = (studentId, clubId) => {
+    //     isPresident(studentId, clubId).then(b => this.setState({
+    //         isPresident: b}))
+    // }
+
 
     componentDidMount = () =>{
         let search = window.location.search
@@ -62,19 +69,26 @@ class ClubList extends React.Component {
                         <td>
                             {this.state.isStudent &&
                                 <a className="btn btn-primary float-right"
-                                href={`../../club-editor/club-editor.html?clubId=${club.clubId}`}
-                                onClick={() => this.enrollStudent(this.state.sid, club.clubId)}>
+                                href={`../../club-editor/club-editor.html?clubId=${club.clubId}=${this.state.sid}`}
+                                onClick={() => this.enrollStudent(this.state.sid, club.clubId, 0)}>
                                 Join
                             </a>}
+                            {this.state.isStudent &&
+                            <a className="btn btn-primary float-right"
+                               href={`../../club-editor/club-editor.html?clubId=${club.clubId}=${this.state.sid}`}
+                               onClick={() => this.enrollStudent(this.state.sid, club.clubId, 1)}>
+                                Join as President
+                            </a>}
                           <a className="btn btn-primary float-right"
-                             href={`../../club-editor/club-editor.html?clubId=${club.clubId}`}>
+                             href={`../../club-editor/club-editor.html?clubId=${club.clubId}=${this.state.sid}`}>
                             Edit
                           </a>
-
-                          <button className="btn btn-danger float-right"
-                                  onClick={() => this.deleteClub(club.clubId)}>
-                            Delete
-                          </button>
+                            {/*{isPresident(this.state.sid, club.clubId) &&*/}
+                            {/*    <button className="btn btn-danger float-right"*/}
+                            {/*            onClick={() => this.deleteClub(club.clubId)}>*/}
+                            {/*        Delete*/}
+                            {/*    </button>*/}
+                            {/*}*/}
 
                         </td>
                       </tr>

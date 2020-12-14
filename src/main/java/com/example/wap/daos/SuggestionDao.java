@@ -46,12 +46,15 @@ public class SuggestionDao {
             @PathVariable("sid") Integer sid) {
         SuggestionRepository.deleteById(sid);
     }
-    @GetMapping("/updateSuggestion/{sid}/{newName}")
+    @GetMapping("/updateSuggestion/{sid}/{newName}/{description}")
     public Suggestion updateSuggestion(
             @PathVariable("sid") Integer sid,
-            @PathVariable("newName") String newName) {
+            @PathVariable("newName") String newName,
+            @PathVariable("description") String description
+    ) {
         Suggestion Suggestion = SuggestionRepository.findById(sid).get();
         Suggestion.setTitle(newName);
+        Suggestion.setDescription(description);
         SuggestionRepository.save(Suggestion);
         return Suggestion;
     }

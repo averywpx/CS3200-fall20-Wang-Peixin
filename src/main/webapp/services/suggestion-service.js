@@ -26,5 +26,5 @@ const findSuggestionById = (SuggestionId) =>
         .then(response => response.json())
 
 const updateSuggestion = (suggestion) =>
-    fetch(`${UPDATE_SUGGESTION}/${suggestion.id}/${suggestion.title}`)
+    fetch(`${UPDATE_SUGGESTION}/${suggestion.id}/${suggestion.title}/${suggestion.description}`)
         .then(response => response.json())

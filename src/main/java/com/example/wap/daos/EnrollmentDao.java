@@ -21,18 +21,21 @@ public class EnrollmentDao {
     @Autowired
     EnrollmentRepository enrollmentRepository;
 
-    @GetMapping("/enrollStudent/{sid}/InClub/{cid}")
+    @GetMapping("/enrollStudent/{sid}/InClub/{cid}/{isPresident}")
     public Enrollment enrollStudentInClub(
             @PathVariable("sid") Integer studentId,
-            @PathVariable("cid") Integer clubId){
+            @PathVariable("cid") Integer clubId,
+            @PathVariable("isPresident") Boolean isPresident){
 
         Enrollment enrollment = new Enrollment();
         Club club = clubRepository.findById(clubId).get();
         Student student = studentRepository.findById(studentId).get();
         enrollment.setStudentId(studentId);
         enrollment.setClubId(clubId);
+        enrollment.setPresident(isPresident);
         enrollment.setStudent(student);
         enrollment.setClub(club);
+
         enrollmentRepository.save(enrollment);
         return enrollment;
     }
@@ -46,6 +49,18 @@ public class EnrollmentDao {
         enrollmentId.setStudentId(studentId);
         enrollmentId.setClubId(clubId);
         enrollmentRepository.deleteById(enrollmentId);
+    }
+
+    @GetMapping("/isPresident/{sid}/in/{cid}")
+    public boolean isPresident(
+            @PathVariable("sid") Integer studentId,
+            @PathVariable("cid") Integer clubId){
+
+//        EnrollmentId enrollmentId = new EnrollmentId();
+//        enrollmentId.setStudentId(studentId);
+//        enrollmentId.setClubId(clubId);
+        Enrollment e = enrollmentRepository.isPresident(studentId, clubId);
+        return e.isPresident();
     }
 
     @GetMapping("/findAllEnrollment")

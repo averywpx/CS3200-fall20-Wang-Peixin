@@ -46,12 +46,18 @@ public class MeetingDao {
             @PathVariable("mid") Integer mid) {
         MeetingRepository.deleteById(mid);
     }
-    @GetMapping("/updateMeeting/{mid}/{newName}")
+    @GetMapping("/updateMeeting/{mid}/{newName}/{date}/{location}/{content}")
     public Meeting updateMeeting(
             @PathVariable("mid") Integer mid,
-            @PathVariable("newName") String newName) {
+            @PathVariable("newName") String newName,
+            @PathVariable("date") String date,
+            @PathVariable("location") String location,
+            @PathVariable("content") String content) {
         Meeting Meeting = MeetingRepository.findById(mid).get();
         Meeting.setTitle(newName);
+        Meeting.setContent(content);
+        Meeting.setDate(date);
+        Meeting.setLocation(location);
         MeetingRepository.save(Meeting);
         return Meeting;
     }

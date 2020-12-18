@@ -2,7 +2,8 @@ class MeetingEditor extends React.Component {
     state = {
         meeting: {},
         clubId: 0,
-        isPresident: false
+        isPresident: false,
+        studentId: 0,
     }
 
     findMeetingById = () => {
@@ -16,7 +17,9 @@ class MeetingEditor extends React.Component {
         findMeetingById(meetingId)
             .then(meeting => this.setState({
                 clubId: cid,
-                meeting: meeting}))
+                meeting: meeting,
+                studentId: sid
+            }))
 
     }
 
@@ -218,7 +221,7 @@ class MeetingEditor extends React.Component {
 
 
 
-                    <a href={`../../club-editor/club-editor.html?clubId=${this.state.clubId}`}>
+                    <a href={`../../meeting-list/meeting-list.html?clubId=${this.state.clubId}=${this.state.studentId}`}>
                         Back
                     </a>
                     <br/>

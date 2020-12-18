@@ -22,7 +22,7 @@ const deleteClub = (ClubId) =>
     fetch(`${DELETE_CLUB_URL}/${ClubId}`)
 
 const updateClub = (club) =>
-    fetch(`${UPDATE_CLUB}/${club.clubId}/${club.name}`)
+    fetch(`${UPDATE_CLUB}/${club.clubId}/${club.name}/${club.description}`)
         .then(response => response.json())
 
 const findClubsForStudent = (sid) =>

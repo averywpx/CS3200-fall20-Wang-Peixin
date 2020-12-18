@@ -48,21 +48,42 @@ class ClubEditor extends React.Component {
                     {/*    className="form-control"*/}
                     {/*    readOnly={true}/>*/}
 
+                    {this.state.isPresident &&
                     <div className="form-group row">
                         <label htmlFor="username"
                                className="col-sm-2 col-form-label">Club Name</label>
                         <div className="col-sm-10">
-                    <input
-                        onChange={
-                            (event) =>
-                                this.setState({
-                                    club: {...this.state.club, name: event.target.value}
-                                })}
-                        className="form-control"
-                        value={this.state.club.name}/>
+                            <input
+                                onChange={
+                                    (event) =>
+                                        this.setState({
+                                            club: {...this.state.club, name: event.target.value}
+                                        })}
+                                className="form-control"
+                                value={this.state.club.name}/>
                         </div>
                     </div>
+                    }
 
+                    {!this.state.isPresident &&
+                    <div className="form-group row">
+                        <label htmlFor="username"
+                               className="col-sm-2 col-form-label">Club Name</label>
+                        <div className="col-sm-10">
+                            <input
+                                readOnly={true}
+                                onChange={
+                                    (event) =>
+                                        this.setState({
+                                            club: {...this.state.club, name: event.target.value}
+                                        })}
+                                className="form-control"
+                                value={this.state.club.name}/>
+                        </div>
+                    </div>
+                    }
+
+                    {this.state.isPresident &&
                     <div className="form-group row">
                         <label htmlFor="username"
                                className="col-sm-2 col-form-label">Description</label>
@@ -77,6 +98,27 @@ class ClubEditor extends React.Component {
                                 value={this.state.club.description}/>
                         </div>
                     </div>
+                    }
+
+                    {!this.state.isPresident &&
+                    <div className="form-group row">
+                        <label htmlFor="username"
+                               className="col-sm-2 col-form-label">Description</label>
+                        <div className="col-sm-10">
+                            <input
+                                readOnly={true}
+                                onChange={
+                                    (event) =>
+                                        this.setState({
+                                            club: {...this.state.club, description: event.target.value}
+                                        })}
+                                className="form-control"
+                                value={this.state.club.description}/>
+                        </div>
+                    </div>
+                    }
+
+
 
 
                     <button

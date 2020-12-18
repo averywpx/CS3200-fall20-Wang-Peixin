@@ -74,12 +74,15 @@ public class ClubDao {
         return ClubRepository.save(newClub);
     }
 
-    @GetMapping("/updateClub/{clubId}/{newName}")
+    @GetMapping("/updateClub/{clubId}/{newName}/{description}")
     public Club updateClub(
             @PathVariable("clubId") Integer clubId,
-            @PathVariable("newName") String newName) {
+            @PathVariable("newName") String newName,
+            @PathVariable("description") String description
+            ) {
         Club club = ClubRepository.findById(clubId).get();
         club.setName(newName);
+        club.setDescription(description);
         return ClubRepository.save(club);
     }
 

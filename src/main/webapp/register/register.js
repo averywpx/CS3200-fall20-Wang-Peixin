@@ -65,7 +65,7 @@ class Register extends React.Component {
                 <div className="col-sm-10">
 
                     <a className="btn btn-success"
-                       href={`../../student-editor/student-editor.html`}
+                       href={`../../student-list/student-list.html`}
                        onClick={() => this.register()}>
                         Sign Up
                     </a>

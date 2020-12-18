@@ -65,6 +65,10 @@ class SuggestionList extends React.Component {
                    href="../../index.html">
                     Home
                 </a>
+                <a className="btn btn-primary float-right"
+                   href={`../../club-editor/club-editor.html?clubId=${this.state.cid}=${this.state.sid}`}>
+                    Club
+                </a>
                 {!this.state.isPresident &&
                 <button
                     className="btn btn-success float-right"

@@ -71,6 +71,10 @@ class MeetingList extends React.Component {
                    href="../../index.html">
                     Home
                 </a>
+                <a className="btn btn-primary float-right"
+                   href={`../../club-editor/club-editor.html?clubId=${this.state.cid}=${this.state.sid}`}>
+                    Club
+                </a>
                 <h1>Meeting List</h1>
 
                 <table className="table">

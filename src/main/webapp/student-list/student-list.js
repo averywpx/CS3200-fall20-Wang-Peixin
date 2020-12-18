@@ -85,12 +85,12 @@ class StudentList extends React.Component {
                                        href={`../../student-editor/student-editor.html?studentId=${student.studentId}`}>
                                         Edit
                                     </a>}
-                                    {  !this.state.inClub &&
-                                        <button className="btn btn-danger float-right"
-                                                onClick={() => this.deleteStudent(student.studentId)}>
-                                            Delete
-                                        </button>
-                                    }
+                                    {/*{  !this.state.inClub &&*/}
+                                    {/*    <button className="btn btn-danger float-right"*/}
+                                    {/*            onClick={() => this.deleteStudent(student.studentId)}>*/}
+                                    {/*        Delete*/}
+                                    {/*    </button>*/}
+                                    {/*}*/}
                                     {  this.state.inClub &&
                                     <a className="btn btn-danger float-right"
                                        href={`../../student-list/student-list.html?clubId=${this.state.cid}`}

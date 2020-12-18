@@ -31,6 +31,11 @@ class StudentEditor extends React.Component {
 
     }
 
+    deleteStudent = (studentId) =>
+        deleteStudent(studentId)
+            .then(() => this.findAllStudents())
+
+
     render() {
         return (
             <div className="container-fluid">
@@ -153,7 +158,8 @@ class StudentEditor extends React.Component {
                     {/*    className="form-control"*/}
                     {/*    value={this.state.student.username}/>*/}
 
-                    <a href={`../../student-list/student-list.html`}>
+                    <a href={`../../student-list/student-list.html`}
+                       className="btn btn-primary float-right">
                         Back to List
                     </a>
                     <br/>
@@ -163,8 +169,15 @@ class StudentEditor extends React.Component {
                         className="btn btn-success">
                         Save
                     </button>
-                    <a href={`../../club-list/club-list.html?sId=${this.state.student.studentId}`}>
+                    <a href={`../../club-list/club-list.html?sId=${this.state.student.studentId}`}
+                       className="btn btn-primary float-left">
                         Search Club
+                    </a>
+                    <a href={`../../index.html`}>
+                        <button className="btn btn-danger float-left"
+                                onClick={() => this.deleteStudent(this.state.student.studentId)}>
+                            Delete
+                        </button>
                     </a>
                 </div>
             </div>

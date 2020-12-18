@@ -1,0 +1,7 @@
+const FIND_ALL_MEETINGS  = "http://localhost:8080/findAllMeetings"
+
+const findAllMeetings = () =>{
+    console.log(FIND_ALL_MEETINGS)
+    return fetch(`${FIND_ALL_MEETINGS}`)
+        .then(response => response.json())
+}
